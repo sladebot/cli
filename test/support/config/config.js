@@ -7,7 +7,9 @@ module.exports = {
   host:     process.env.SEQ_HOST || '127.0.0.1',
   pool:     {
     maxConnections: process.env.SEQ_POOL_MAX  || 5,
-    maxIdleTime:    process.env.SEQ_POOL_IDLE || 30000
+    maxIdleTime:    process.env.SEQ_POOL_IDLE || 3000,
+    max:            process.env.SEQ_POOL_MAX  || 5,
+    idle:           process.env.SEQ_POOL_IDLE || 3000
   },
 
   rand: function () {
@@ -23,7 +25,9 @@ module.exports = {
     port:     process.env.SEQ_MYSQL_PORT || process.env.SEQ_PORT || 3306,
     pool:     {
       maxConnections: process.env.SEQ_MYSQL_POOL_MAX  || process.env.SEQ_POOL_MAX  || 5,
-      maxIdleTime:    process.env.SEQ_MYSQL_POOL_IDLE || process.env.SEQ_POOL_IDLE || 3000
+      maxIdleTime:    process.env.SEQ_MYSQL_POOL_IDLE || process.env.SEQ_POOL_IDLE || 3000,
+      max:            process.env.SEQ_MYSQL_POOL_MAX  || process.env.SEQ_POOL_MAX  || 5,
+      idle:           process.env.SEQ_MYSQL_POOL_IDLE || process.env.SEQ_POOL_IDLE || 3000
     }
   },
 
@@ -38,7 +42,9 @@ module.exports = {
     port:     process.env.SEQ_PG_PORT || process.env.SEQ_PORT  || 5432,
     pool:     {
       maxConnections: process.env.SEQ_PG_POOL_MAX  || process.env.SEQ_POOL_MAX  || 5,
-      maxIdleTime:    process.env.SEQ_PG_POOL_IDLE || process.env.SEQ_POOL_IDLE || 3000
+      maxIdleTime:    process.env.SEQ_PG_POOL_IDLE || process.env.SEQ_POOL_IDLE || 3000,
+      max:            process.env.SEQ_PG_POOL_MAX  || process.env.SEQ_POOL_MAX  || 5,
+      idle:           process.env.SEQ_PG_POOL_IDLE || process.env.SEQ_POOL_IDLE || 3000
     }
   },
 
@@ -50,7 +56,26 @@ module.exports = {
     port:     process.env.SEQ_MYSQL_PORT || process.env.SEQ_PORT || 3306,
     pool:     {
       maxConnections: process.env.SEQ_MYSQL_POOL_MAX  || process.env.SEQ_POOL_MAX  || 5,
-      maxIdleTime:    process.env.SEQ_MYSQL_POOL_IDLE || process.env.SEQ_POOL_IDLE || 3000
+      maxIdleTime:    process.env.SEQ_MYSQL_POOL_IDLE || process.env.SEQ_POOL_IDLE || 3000,
+      max:            process.env.SEQ_MYSQL_POOL_MAX  || process.env.SEQ_POOL_MAX  || 5,
+      idle:           process.env.SEQ_MYSQL_POOL_IDLE || process.env.SEQ_POOL_IDLE || 3000
+    }
+  },
+
+  mssql: {
+    database: process.env.SEQ_MSSQL_DB   || process.env.SEQ_DB   || 'sequelize_test',
+    username: process.env.SEQ_MSSQL_USER || process.env.SEQ_USER || 'sa',
+    password: process.env.SEQ_MSSQL_PW   || process.env.SEQ_PW   || 'Password12!',
+    host:     process.env.SEQ_MSSQL_HOST || process.env.SEQ_HOST || '127.0.0.1',
+    port:     process.env.SEQ_MSSQL_PORT || process.env.SEQ_PORT || 1433,
+    dialectOptions: {
+      requestTimeout: 25000
+    },
+    pool:     {
+      maxConnections: process.env.SEQ_MSSQL_POOL_MAX  || process.env.SEQ_POOL_MAX  || 5,
+      maxIdleTime:    process.env.SEQ_MSSQL_POOL_IDLE || process.env.SEQ_POOL_IDLE || 3000,
+      max:            process.env.SEQ_MSSQL_POOL_MAX  || process.env.SEQ_POOL_MAX  || 5,
+      idle:           process.env.SEQ_MSSQL_POOL_IDLE || process.env.SEQ_POOL_IDLE || 3000
     }
   }
 };
