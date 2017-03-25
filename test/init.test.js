@@ -3,6 +3,7 @@
 var Support = require(__dirname + '/support');
 var helpers = require(__dirname + '/support/helpers');
 var gulp    = require('gulp');
+var path    = require('path');
 
 ([
   'init'
@@ -86,7 +87,7 @@ var gulp    = require('gulp');
             gulp
               .src(Support.resolveSupportPath('tmp', 'models'))
               .pipe(helpers.readFile('index.js'))
-              .pipe(helpers.ensureContent('__dirname + \'/../config/config.json\''))
+              .pipe(helpers.ensureContent(path.join('__dirname', '../config/config.json')))
               .pipe(helpers.teardown(done));
           }));
       });
@@ -100,7 +101,7 @@ var gulp    = require('gulp');
             gulp
               .src(Support.resolveSupportPath('tmp', 'models'))
               .pipe(helpers.readFile('index.js'))
-              .pipe(helpers.ensureContent('__dirname + \'/../my/configuration-file.json\''))
+              .pipe(helpers.ensureContent(path.join('__dirname', '../my/configuration-file.json')))
               .pipe(helpers.teardown(done));
           }));
       });
