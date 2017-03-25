@@ -12,7 +12,6 @@ var _         = require('lodash');
   '--migrations-path migrations db:migrate',
   'db:migrate --migrations-path ./migrations',
   'db:migrate --migrations-path ./migrations/',
-  'db:migrate --coffee',
   'db:migrate --config ../../support/tmp/config/config.json',
   'db:migrate --config ' + Support.resolveSupportPath('tmp', 'config', 'config.json'),
   'db:migrate --config ../../support/tmp/config/config.js',
@@ -28,7 +27,7 @@ var _         = require('lodash');
     var config        = _.assign({}, helpers.getTestConfig(), options.config);
     var configContent = JSON.stringify(config);
 
-    migrationFile = migrationFile + '.'  + ((flag.indexOf('coffee') === -1) ? 'js' : 'coffee');
+    migrationFile = migrationFile + '.js';
 
     if (flag.match(/config\.js$/)) {
       configPath    = configPath + 'config.js';

@@ -13,7 +13,6 @@ var _         = require('lodash');
   '--seeders-path seeders --seed seedPerson.js db:seed',
   'db:seed --seed seedPerson.js --seeders-path ./seeders',
   'db:seed --seed seedPerson.js --seeders-path ./seeders/',
-  'db:seed --seed seedPerson.coffee --coffee',
   'db:seed --seed seedPerson.js --config ../../support/tmp/config/config.json',
   'db:seed --seed seedPerson.js --config ' +
     Support.resolveSupportPath('tmp', 'config', 'config.json'),
@@ -26,9 +25,9 @@ var _         = require('lodash');
     var seederFile    = options.seederFile || 'seedPerson';
     var config        = _.assign({}, helpers.getTestConfig(), options.config);
     var configContent = JSON.stringify(config);
-    var migrationFile = 'createPerson.'  + ((flag.indexOf('coffee') === -1) ? 'js' : 'coffee');
+    var migrationFile = 'createPerson.' + 'js';
 
-    seederFile = seederFile + '.'  + ((flag.indexOf('coffee') === -1) ? 'js' : 'coffee');
+    seederFile = seederFile + '.js';
 
     if (flag.match(/config\.js$/)) {
       configPath    = configPath + 'config.js';
@@ -46,8 +45,8 @@ var _         = require('lodash');
       .pipe(helpers.copySeeder(seederFile))
       .pipe(helpers.overwriteFile(configContent, configPath))
       .pipe(helpers.runCli('db:migrate' +
-        ((flag.indexOf('coffee') === -1 && flag.indexOf('config') === -1) ?
-          '' : flag.replace('db:seed', ''))))
+        (flag.indexOf('config') === -1 ? '' : flag.replace('db:seed', ''))
+      ))
       .pipe(helpers.runCli(flag, { pipeStdout: true }))
       .pipe(helpers.teardown(callback));
   };
@@ -72,7 +71,7 @@ var _         = require('lodash');
         prepare(function () {
           expect(fs.statSync(storageFile).isFile()).to.be(true);
           expect(fs.readFileSync(storageFile).toString())
-            .to.match(/^\[\n  "seedPerson\.(js|coffee)"\n\]$/);
+            .to.match(/^\[\n  "seedPerson\.js"\n\]$/);
           done();
         }, { config: { seederStoragePath: storageFile, seederStorage: 'json' } });
       });
