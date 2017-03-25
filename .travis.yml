@@ -1,6 +1,7 @@
 before_script:
   - "mysql -e 'create database sequelize_test;'"
   - "psql -c 'create database sequelize_test;' -U postgres"
+  - npm install mysql2 mysql pg
   - npm install sequelize@$(echo $SEQUELIZE)
 
 script:
